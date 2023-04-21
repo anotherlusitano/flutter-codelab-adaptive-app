@@ -15,9 +15,10 @@ class PlaylistDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FlutterDevPlaylists>(
-      builder: (context, playlists, _) {
-        final playlistItems = playlists.playlistItems(playlistId: playlistId);
+    return Consumer<AuthedUserPlaylists>(
+      // Update this line
+      builder: (context, flutterDev, _) {
+        final playlistItems = flutterDev.playlistItems(playlistId: playlistId);
         if (playlistItems.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
