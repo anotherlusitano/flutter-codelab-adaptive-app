@@ -6,13 +6,13 @@ import 'adaptive_image.dart'; // Add this line
 import 'app_state.dart';
 
 class Playlists extends StatelessWidget {
-  const Playlists({super.key, required this.playlistSelected});
+  const Playlists({required this.playlistSelected, super.key});
 
   final PlaylistsListSelected playlistSelected;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FlutterDevPlaylists>(
+    return Consumer<AuthedUserPlaylists>(
       builder: (context, flutterDev, child) {
         final playlists = flutterDev.playlists;
         if (playlists.isEmpty) {
@@ -71,7 +71,6 @@ class _PlaylistsListViewState extends State<_PlaylistsListView> {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             leading: AdaptiveImage.network(
-              // Change this one.
               playlist.snippet!.thumbnails!.default_!.url!,
             ),
             title: Text(playlist.snippet!.title!),

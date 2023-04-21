@@ -5,14 +5,12 @@ import 'package:googleapis/youtube/v3.dart';
 import 'package:http/http.dart' as http;
 
 class AuthedUserPlaylists extends ChangeNotifier {
-  // Rename class
   set authClient(http.Client client) {
-    // Drop constructor, add setter
     _api = YouTubeApi(client);
     _loadPlaylists();
   }
 
-  bool get isLoggedIn => _api != null; // Add property
+  bool get isLoggedIn => _api != null;
 
   Future<void> _loadPlaylists() async {
     String? nextPageToken;
@@ -20,9 +18,8 @@ class AuthedUserPlaylists extends ChangeNotifier {
 
     do {
       final response = await _api!.playlists.list(
-        // Add ! to _api
         ['snippet', 'contentDetails', 'id'],
-        mine: true, // convert from channelId: to mine:
+        mine: true,
         maxResults: 50,
         pageToken: nextPageToken,
       );
@@ -34,7 +31,7 @@ class AuthedUserPlaylists extends ChangeNotifier {
     } while (nextPageToken != null);
   }
 
-  YouTubeApi? _api; // Convert from late final to optional
+  YouTubeApi? _api;
 
   final List<Playlist> _playlists = [];
   List<Playlist> get playlists => UnmodifiableListView(_playlists);
@@ -52,7 +49,6 @@ class AuthedUserPlaylists extends ChangeNotifier {
     String? nextPageToken;
     do {
       var response = await _api!.playlistItems.list(
-        // Add ! to _api
         ['snippet', 'contentDetails'],
         playlistId: playlistId,
         maxResults: 25,

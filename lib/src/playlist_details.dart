@@ -3,8 +3,8 @@ import 'package:googleapis/youtube/v3.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/link.dart';
 
-import 'adaptive_image.dart'; // Add this line,
-import 'adaptive_text.dart'; // and this line
+import 'adaptive_image.dart';
+import 'adaptive_text.dart';
 import 'app_state.dart';
 
 class PlaylistDetails extends StatelessWidget {
@@ -16,7 +16,6 @@ class PlaylistDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthedUserPlaylists>(
-      // Update this line
       builder: (context, flutterDev, _) {
         final playlistItems = flutterDev.playlistItems(playlistId: playlistId);
         if (playlistItems.isEmpty) {
